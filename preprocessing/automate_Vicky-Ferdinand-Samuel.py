@@ -36,12 +36,8 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def handle_outliers(df: pd.DataFrame) -> pd.DataFrame:
-    outlier_mask = (
-        (df["person_age"].between(18, 100))
-        & ((df["person_emp_length"].isna()) | (df["person_emp_length"].between(0, 80)))
-        & ((df["person_emp_length"].isna()) | (df["person_emp_length"] <= (df["person_age"] - 14)))
-    )
-    return df.loc[outlier_mask].copy()
+    outlier_mask = (df["person_age"] > 100) | (df["person_emp_length"] > 60)
+    return df.loc[~outlier_mask].copy()
 
 
 def split_dataset(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -126,10 +122,8 @@ def run_preprocessing(input_path: Path, output_dir: Path) -> dict[str, object]:
     removed_outliers = int(len(deduplicated_df) - len(clean_df))
 
     train_df, test_df = split_dataset(clean_df)
-    q01 = train_df[NUMERIC_COLS].quantile(0.01)
-    q99 = train_df[NUMERIC_COLS].quantile(0.99)
+    train_df, test_df, q01, q99 = winsorize_numeric(train_df, test_df)
     train_df, test_df, medians = handle_missing_values(train_df, test_df)
-    train_df, test_df, q01, q99 = winsorize_numeric(train_df, test_df, q01, q99)
     train_df, test_df = encode_features(train_df, test_df)
     train_df, test_df, _ = scale_features(train_df, test_df)
     processed_df = save_dataset(train_df, test_df, output_dir)
