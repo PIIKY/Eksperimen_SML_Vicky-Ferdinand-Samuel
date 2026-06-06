@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Eksperimen SML - Credit Risk Prediction
 
 Repository ini dibuat khusus untuk Kriteria 1 Submission Dicoding MSML: eksperimen dataset dan preprocessing otomatis.
@@ -70,3 +71,6 @@ Workflow akan:
 4. Menjalankan `automate_Vicky-Ferdinand-Samuel.py`.
 5. Memvalidasi output dataset.
 6. Upload dataset preprocessing sebagai artifact workflow.
+=======
+# Eksperimen_SML_Vicky-Ferdinand-Samuel
+>>>>>>> ac1b0451d94bf056dc464b286aafc405cd4bcb69
