@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -221,4 +219,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
->>>>>>> ac1b0451d94bf056dc464b286aafc405cd4bcb69
